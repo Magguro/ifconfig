@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ifconfig
+  labels:
+    app: ifconfig
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ifconfig
+  template:
+    metadata:
+      labels:
+        app: ifconfig
+    spec:
+      containers:
+        - name: ifconfig
+          image: magguro/ifconfig
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 20m
+              memory: 128Mi
